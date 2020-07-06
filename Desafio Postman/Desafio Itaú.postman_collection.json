@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "edc99105-c711-4e95-adf9-10df514a7a7f",
+		"name": "Desafio Itaú",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c44c0219-df7f-429f-8a5d-50d17fa6f5c4",
+						"exec": [
+							"let jsonData = JSON.parse(request.data)",
+							"",
+							"let result = jsonData.map(user => `${user.username}`)",
+							"",
+							"result.forEach(insertUsername)",
+							"",
+							"function insertUsername(user, index) {",
+							"  postman.setEnvironmentVariable(`username${index}`, index);",
+							"}",
+							"",
+							"postman.setEnvironmentVariable('data', new Date())"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "64d781df-587c-4007-b093-1ea1d0a54e3a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"id\": 1,\n    \"username\": \"anaMaia\",\n    \"firstName\": \"Ana\",\n    \"lastName\": \"Maia\",\n    \"email\": \"anaMaia@gmail.com\",\n    \"password\": \"123456\",\n    \"phone\": \"1199736645\",\n    \"userStatus\": 0\n  },\n  {\n    \"id\": 2,\n    \"username\": \"rodrigoMendes\",\n    \"firstName\": \"Rodrigo\",\n    \"lastName\": \"Mendes\",\n    \"email\": \"rodrigoMendes@gmail.com\",\n    \"password\": \"123456\",\n    \"phone\": \"1199733785\",\n    \"userStatus\": 0\n  },\n  {\n    \"id\": 3,\n    \"username\": \"tatianaVasconcelos\",\n    \"firstName\": \"Tatiana\",\n    \"lastName\": \"Vasconcelos\",\n    \"email\": \"tatianaVasconcelos@gmail.com\",\n    \"password\": \"123456\",\n    \"phone\": \"7599733785\",\n    \"userStatus\": 0\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/createWithArray",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"createWithArray"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPet1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4ac9cbbc-6c1c-4361-b2c8-ed36251afbc4",
+						"exec": [
+							"let jsonData = JSON.parse(request.data)",
+							"",
+							"postman.setEnvironmentVariable(`idPet${jsonData.id}`, jsonData.id)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e3ef8679-0c35-40e9-8520-64563ca0feec",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"category\": {\n        \"id\": 1,\n        \"name\": \"dog\"\n    },\n    \"name\": \"Snoopy\",\n    \"photoUrls\": [\n        \"\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 1,\n            \"name\": \"dog\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pet",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPet2",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e9e3217b-a6bd-429b-967d-abd435eb31d5",
+						"exec": [
+							"let jsonData = JSON.parse(request.data)",
+							"",
+							"postman.setEnvironmentVariable(`idPet${jsonData.id}`, jsonData.id)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "52c59631-36c2-468a-97e4-d938421e6f00",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"category\": {\n        \"id\": 2,\n        \"name\": \"cat\"\n    },\n    \"name\": \"Bichento\",\n    \"photoUrls\": [\n        \"\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 2,\n            \"name\": \"cat\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pet",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPet3",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1bca7216-46f7-45d3-bca4-b5dc063de57b",
+						"exec": [
+							"let jsonData = JSON.parse(request.data)",
+							"",
+							"postman.setEnvironmentVariable(`idPet${jsonData.id}`, jsonData.id)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "603802ca-bb6b-4dd3-bd01-846490d5ec6c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"category\": {\n        \"id\": 3,\n        \"name\": \"platypus\"\n    },\n    \"name\": \"Perry\",\n    \"photoUrls\": [\n        \"\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 3,\n            \"name\": \"platypus\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/pet",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "salePet1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "65e7b52a-5b18-4c9d-b577-bb4672cd59c8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7279c88f-39c9-4437-b83d-f4da76f9cf18",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{username0}},\n  \"petId\": {{idPet3}},\n  \"quantity\": 1,\n  \"shipDate\": \"{{data}}\",\n  \"status\": \"placed\",\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "salePet2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{username2}},\n  \"petId\": {{idPet1}},\n  \"quantity\": 1,\n  \"shipDate\": \"{{data}}\",\n  \"status\": \"placed\",\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/store/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
